@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/alingse/djan"
+	djan "github.com/alingse/djan-go"
 	"gorm.io/gorm"
 )
 

@@ -1,4 +1,4 @@
-module github.com/alingse/djan
+module github.com/alingse/djan-go
 
 go 1.18
 
