@@ -1,8 +1,21 @@
 package djan
 
-import "net/http"
+import (
+	"net/http"
+)
 
-func (d *djanAdmin) Handler(prefix string) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
+func (d *djanAdmin) NewHandler(prefix string) http.Handler {
+	return &adminWeb{
+		djanAdmin: d,
+		prefix:    prefix,
 	}
+}
+
+type adminWeb struct {
+	*djanAdmin
+	prefix string
+}
+
+func (d *adminWeb) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	_, _ = w.Write([]byte(r.URL.String()))
 }
