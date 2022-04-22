@@ -1,7 +1,8 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"net/http"
 
 	djan "github.com/alingse/djan-go"
 	"github.com/alingse/djan-go/example/app"
@@ -20,6 +21,9 @@ func main() {
 
 	var admin = djan.NewAdmin(app.DB)
 	admin.Register(&app.UserModel{})
+	prefix := "/admin"
+	http.HandleFunc(prefix, admin.Handler(prefix))
 
-	fmt.Println(admin)
+	log.Printf("serve at http://localhost:2345%s", prefix)
+	http.ListenAndServe(":2345", nil)
 }
