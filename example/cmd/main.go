@@ -5,13 +5,20 @@ import (
 
 	djan "github.com/alingse/djan-go"
 	"github.com/alingse/djan-go/example/app"
-	"gorm.io/gorm"
 )
 
-func main() {
-	var db *gorm.DB
-	var admin = djan.NewAdmin(db)
+func initModel() {
+	db := app.DB
+	err := db.AutoMigrate(&app.UserModel{})
+	if err != nil {
+		panic(err)
+	}
+}
 
+func main() {
+	initModel()
+
+	var admin = djan.NewAdmin(app.DB)
 	admin.Register(&app.UserModel{})
 
 	fmt.Println(admin)
