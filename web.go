@@ -4,18 +4,18 @@ import (
 	"net/http"
 )
 
-func (d *djanAdmin) NewHandler(prefix string) http.Handler {
-	return &adminWeb{
+func (d *djanAdmin) NewRest(prefix string) http.Handler {
+	return &adminRest{
 		djanAdmin: d,
 		prefix:    prefix,
 	}
 }
 
-type adminWeb struct {
+type adminRest struct {
 	*djanAdmin
 	prefix string
 }
 
-func (d *adminWeb) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (d *adminRest) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write([]byte(r.URL.String()))
 }

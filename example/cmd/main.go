@@ -21,8 +21,8 @@ func main() {
 
 	var admin = djan.NewAdmin(app.DB)
 	admin.Register(&app.UserModel{})
-	prefix := "/admin/"
-	http.Handle(prefix, admin.NewHandler(prefix))
+	prefix := "/admin/api/"
+	http.Handle(prefix, admin.NewRest(prefix))
 
 	log.Printf("serve at http://localhost:2345%s", prefix)
 	http.ListenAndServe(":2345", nil)
